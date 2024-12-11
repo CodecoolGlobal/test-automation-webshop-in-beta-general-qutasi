@@ -1,0 +1,4 @@
+username,expectedUrl,errorMessage
+"",https://www.saucedemo.com/,"Epic sadface: Username is required"
+a,https://www.saucedemo.com/,"Epic sadface: Username and password do not match any user in this service"
+locked_out_user,https://www.saucedemo.com/,"Epic sadface: Sorry, this user has been locked out."
