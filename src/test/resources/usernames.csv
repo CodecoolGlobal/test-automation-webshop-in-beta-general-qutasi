@@ -1,0 +1,6 @@
+username,expectedUrl
+standard_user,https://www.saucedemo.com/inventory.html
+problem_user,https://www.saucedemo.com/inventory.html
+performance_glitch_user,https://www.saucedemo.com/inventory.html
+error_user,https://www.saucedemo.com/inventory.html
+visual_user,https://www.saucedemo.com/inventory.html
