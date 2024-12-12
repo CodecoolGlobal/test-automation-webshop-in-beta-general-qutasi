@@ -23,13 +23,13 @@ jobs:
 
       - name: Build and start services
         run: |
-          docker-compose -f docker-selenium-ci.yml up --build -d
+          docker-compose -f selenium-ci.yml up --build -d
         env:
           SELENIUM_HOST: http://selenium-hub:4444/wd/hub
 
       - name: Run tests
         run: |
-          docker-compose -f docker-selenium-ci.yml run app
+          docker-compose -f selenium-ci.yml run app
 
       - name: Copy reports from app container
         run: |
@@ -42,4 +42,4 @@ jobs:
           path: reports/
 
       - name: Shut down and clean up
-        run: docker-compose -f docker-selenium-ci.yml down
+        run: docker-compose -f selenium-ci.yml down
