@@ -8,15 +8,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
     private static final Duration TIMEOUT = Duration.ofSeconds(3);
 
-    protected WebDriver driver;
+    protected RemoteWebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;
 
@@ -29,10 +32,11 @@ public class BaseTest {
     protected CheckoutCompletePage checkoutCompletePage;
 
     @BeforeAll
-    public void beforeAll() {
+    public void beforeAll() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
-        driver = new ChromeDriver(options);
+        driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"),
+                new ChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(TIMEOUT);
         wait = new WebDriverWait(driver, TIMEOUT);
