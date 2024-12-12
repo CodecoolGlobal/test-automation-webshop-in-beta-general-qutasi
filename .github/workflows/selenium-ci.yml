@@ -1,0 +1,45 @@
+name: Run Selenium Tests
+
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose
+
+      - name: Build and start services
+        run: |
+          docker-compose -f docker-selenium-ci.yml up --build -d
+        env:
+          SELENIUM_HOST: http://selenium-hub:4444/wd/hub
+
+      - name: Run tests
+        run: |
+          docker-compose -f docker-selenium-ci.yml run app
+
+      - name: Copy reports from app container
+        run: |
+          docker cp test-runner:/app/target/reports ./reports
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Reports
+          path: reports/
+
+      - name: Shut down and clean up
+        run: docker-compose -f docker-selenium-ci.yml down
