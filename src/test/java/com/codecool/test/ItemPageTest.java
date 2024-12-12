@@ -1,4 +1,4 @@
-package com.codecool.tests;
+package com.codecool.test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
