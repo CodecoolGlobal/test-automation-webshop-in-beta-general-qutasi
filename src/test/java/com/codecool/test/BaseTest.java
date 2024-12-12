@@ -1,4 +1,4 @@
-package com.codecool.tests;
+package com.codecool.test;
 
 import com.codecool.models.*;
 import org.junit.jupiter.api.AfterAll;
