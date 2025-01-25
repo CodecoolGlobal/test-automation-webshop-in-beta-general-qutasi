@@ -7,11 +7,6 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4444/status"]
-      interval: 5s
-      timeout: 10s
-      retries: 5
 
   chrome:
     image: selenium/node-chrome:4.22.0
@@ -34,3 +29,17 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test-runner
+    depends_on:
+      - selenium-hub
+    environment:
+      - SELENIUM_HOST=http://selenium-hub:4444/wd/hub
+    volumes:
+      - .:/app
+      - ./reports:/app/target/reports
+    command: [ "mvn", "test" ]

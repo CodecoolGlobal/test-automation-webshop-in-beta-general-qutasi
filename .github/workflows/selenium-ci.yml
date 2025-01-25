@@ -22,17 +22,8 @@ jobs:
         run: |
           docker compose -f docker-compose.yml up --build -d
 
-      - name: Wait for Selenium Hub to be ready
-        run: |
-          until curl -s http://localhost:4444/status | grep -q '"ready":true'; do
-            echo "Waiting for Selenium Hub..."
-            sleep 5
-          done
-
-      - name: Run Maven tests
-        run: mvn test
-        env:
-          SELENIUM_HOST: http://localhost:4444/wd/hub
+       - name: Run Maven tests in app container
+        run: docker compose -f docker-compose.yml run app
 
       - name: Upload test reports
         if: always()
