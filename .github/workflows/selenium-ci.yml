@@ -18,28 +18,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: sudo apt-get update && sudo apt-get install -y docker-compose
-
-      - name: Build and start services
+      - name: Build and start Selenium Grid
         run: |
-          docker-compose -f docker-compose.yml up --build -d
+          docker compose -f docker-compose.yml up --build -d
+
+      - name: Wait for Selenium Hub to be ready
+        run: |
+          until curl -s http://localhost:4444/status | grep -q '"ready":true'; do
+            echo "Waiting for Selenium Hub..."
+            sleep 5
+          done
+
+      - name: Run Maven tests
+        run: mvn test
         env:
-          SELENIUM_HOST: http://selenium-hub:4444/wd/hub
-
-      - name: Run tests
-        run: |
-          docker-compose -f docker-compose.yml run app
-
-      - name: Copy reports from app container
-        run: |
-          docker cp test-runner:/app/target/reports ./reports
+          SELENIUM_HOST: http://localhost:4444/wd/hub
 
       - name: Upload test reports
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: Test Reports
           path: reports/
 
       - name: Shut down and clean up
-        run: docker-compose -f docker-compose.yml down
+        run: docker-compose -f docker-compose.yml down --volumes
