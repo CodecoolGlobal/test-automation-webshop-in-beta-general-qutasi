@@ -22,7 +22,7 @@ jobs:
         run: |
           docker compose -f docker-compose.yml up --build -d
 
-       - name: Run Maven tests in app container
+      - name: Run Maven tests in app container
         run: docker compose -f docker-compose.yml run app
 
       - name: Upload test reports
