@@ -32,12 +32,12 @@ This project automates the testing of core functionalities for a web application
 
 ## Tech Stack
 
-- ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
-- ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
-- ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
-- ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit5&logoColor=white)
-- ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-- ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
+- [![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/en/)
+- [![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)](https://maven.apache.org/)
+- [![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)](https://www.selenium.dev/)
+- [![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit5&logoColor=white)](https://junit.org/junit5/)
+- [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+- [![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
 ---
 
@@ -76,19 +76,19 @@ Before running the tests, ensure the following are installed:
 To execute all tests:
 
 ```bash
-mvn clean test
+  mvn clean test
 ```
 
 To run specific test classes or methods:
 
 ```bash
-mvn -Dtest=TestClassName#methodName test
+  mvn -Dtest=TestClassName#methodName test
 ```
 
 ### Using Docker
 
 ```bash
-docker-compose up 
+  docker-compose up 
 ```
 
 The Docker container will automatically set up the environment, execute the tests, and save reports to `/target` inside the container.
@@ -115,6 +115,12 @@ After executing the tests, reports will be available in the following directory:
 ```
 
 These reports provide detailed information about passed, failed, or skipped tests.
+
+---
+
+Below is an example of a successful test execution:
+
+![swaglabs_tests_run.png](reports/img/successful_loginpage_test.png)
 
 ---
 
